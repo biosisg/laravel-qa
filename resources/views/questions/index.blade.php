@@ -33,11 +33,17 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
-                                    <p class="lead">
-                                        Asked by
-                                        <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
-                                        <small class="text-muted">{{ $question->created_date }}</small>
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
+                                        <a href="{{ route('questions.edit', $question->id) }}"
+                                           class="btn btn-outline-info">Edit</a>
+                                    </div>
+                                    <p class="">
+                                        <small>
+                                            Asked by
+                                            <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
+                                            <span class="text-muted">{{ $question->created_date }}</span>
+                                        </small>
                                     </p>
                                     {{ str_limit($question->body, 250) }}
                                 </div>

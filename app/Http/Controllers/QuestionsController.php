@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AskQuestionRequest;
 use App\Models\Question;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
@@ -48,22 +51,29 @@ class QuestionsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param Question $question
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function edit(Question $question)
     {
-        //
+        return view('questions.edit', compact('question'));
     }
 
     /**
      * Update the specified resource in storage.
+     * @param AskQuestionRequest $request
+     * @param Question $question
      */
-    public function update(Request $request, Question $question)
+    public function update(AskQuestionRequest $request, Question $question)
     {
-        //
+        $question->update($request->only('title', 'body'));
+
+        return redirect()->route('questions.index')->with('success', 'Your question has been updated.');
     }
 
     /**
      * Remove the specified resource from storage.
+     * @param Question $question
      */
     public function destroy(Question $question)
     {
