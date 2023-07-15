@@ -7,7 +7,6 @@ use App\Models\Question;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
@@ -33,6 +32,8 @@ class QuestionsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param AskQuestionRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AskQuestionRequest $request)
     {
@@ -43,10 +44,14 @@ class QuestionsController extends Controller
 
     /**
      * Display the specified resource.
+     * @param Question $question
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function show(Question $question)
     {
-        //
+        $question->increment('views');
+
+        return view('questions.show', compact('question'));
     }
 
     /**

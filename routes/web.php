@@ -18,7 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('questions', QuestionsController::class);
+Route::resource('questions', QuestionsController::class)->except('show');
+Route::get('/questions/{slug}', [QuestionsController::class, 'show'])->name('questions.show');
 
 Auth::routes();
 
