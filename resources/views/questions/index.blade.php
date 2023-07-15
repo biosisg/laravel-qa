@@ -36,11 +36,11 @@
                                     <div class="d-flex justify-content-between">
                                         <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
                                         <div>
-                                            @if (Auth::user()->can('update-question', $question))
+                                            @can('update', $question)
                                                 <a href="{{ route('questions.edit', $question->id) }}"
                                                    class="btn btn-outline-info">Edit</a>
-                                            @endif
-                                            @if (Auth::user()->can('delete-question', $question))
+                                            @endcan
+                                            @can('delete', $question)
                                                 <form action="{{ route('questions.destroy', $question->id) }}"
                                                       method="post"
                                                       class="form-delete">
@@ -50,7 +50,7 @@
                                                             onclick="return confirm('Are you sure ?')">Delete
                                                     </button>
                                                 </form>
-                                            @endif
+                                            @endcan
                                         </div>
                                     </div>
                                     <p class="">
