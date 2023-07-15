@@ -35,8 +35,19 @@
                                 <div class="media-body">
                                     <div class="d-flex justify-content-between">
                                         <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
-                                        <a href="{{ route('questions.edit', $question->id) }}"
-                                           class="btn btn-outline-info">Edit</a>
+                                        <div>
+                                            <a href="{{ route('questions.edit', $question->id) }}"
+                                               class="btn btn-outline-info">Edit</a>
+                                            <form action="{{ route('questions.destroy', $question->id) }}"
+                                                  method="post"
+                                                  class="form-delete">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-outline-danger"
+                                                        onclick="return confirm('Are you sure ?')">Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                     <p class="">
                                         <small>
