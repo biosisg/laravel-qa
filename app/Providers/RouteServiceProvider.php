@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::bind('slug', function ($slug){
-            return Question::where('slug', $slug)->first() ?? abort(404);
+            return Question::with('answers.user')->where('slug', $slug)->first() ?? abort(404);
         });
 
         RateLimiter::for('api', function (Request $request) {
