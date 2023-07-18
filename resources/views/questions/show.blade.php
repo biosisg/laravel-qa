@@ -41,8 +41,8 @@
                                             <img src="{{ $question->user->avatar }}" alt="">
                                         </a>
                                         <span class="mt-1">
-                                    <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
-                                </span>
+                                            <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        @include('answers._index', ['answers'=> $question->answers, 'answersCount' => $question->answers_count])
+        @include('answers._index', ['answers' => $question->answers, 'answersCount' => $question->answers_count])
         @include('answers._create')
     </div>
 @endsection
