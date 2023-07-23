@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Http\Traits\VotableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
     use HasFactory;
+    use VotableTrait;
 
     protected $fillable = [
         'title',
@@ -27,11 +29,6 @@ class Question extends Model
     public function favorites()
     {
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
-    }
-
-    public function votes()
-    {
-        return $this->morphToMany(User::class, 'votable');
     }
 
     public function getIsFavoritedAttribute()
@@ -86,15 +83,5 @@ class Question extends Model
     {
         $this->best_answer_id = $answer->id;
         $this->save();
-    }
-
-    public function upVotes()
-    {
-        return $this->votes()->wherePivot('vote', 1);
-    }
-
-    public function downVotes()
-    {
-        return $this->votes()->wherePivot('vote', -1);
     }
 }
