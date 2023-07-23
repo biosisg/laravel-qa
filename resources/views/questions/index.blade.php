@@ -60,7 +60,7 @@
                                             <span class="text-muted">{{ $question->created_date }}</span>
                                         </small>
                                     </p>
-                                    {{ str_limit($question->body, 250) }}
+                                    <div class="excerpt">{{ $question->excerpt(350) }}</div>
                                 </div>
                             </div>
                             <hr>
